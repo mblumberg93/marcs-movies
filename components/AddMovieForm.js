@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Input, Button, Divider } from 'react-native-elements'
-import { View, StyleSheet, Text } from "react-native";
+import { Input, Button } from 'react-native-elements'
+import { View, StyleSheet } from "react-native";
 import { RAPID_API_KEY } from '../secrets';
+import { firebaseDB } from '../services/firebase';
+import MovieCard from '../components/MovieCard';
 
 class AddMovieForm extends Component {
     constructor(props) {
@@ -13,11 +15,14 @@ class AddMovieForm extends Component {
     }
 
     handleImdbIDChange(e) {
-        this.setState({ imdbID: e });
+        if (e) {
+            const value = e.toLowerCase();
+            this.setState({ imdbID: value });
+        }
     }
 
     handleSearch() {
-        const url = "https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=" + this.state.imdbID
+        const url = "https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=" + this.state.imdbID;
         fetch(url, {
             method: "GET",
             headers: {
@@ -33,17 +38,51 @@ class AddMovieForm extends Component {
     }
 
     parseMovieData(movieData) {
-        //TODO handle creating a "movie" object
-        console.log(movieData);
+        const movie = {
+            title: movieData.Title,
+            year: movieData.Year,
+            genre: movieData.Genre,
+            actors: movieData.Actors,
+            runtime: movieData.Runtime,
+            director: movieData.Director,
+            imdbRating: movieData.imdbRating,
+            plot: movieData.Plot,
+            poster: movieData.Poster
+        }
+        this.setState({ movie: movie });
+    }
+
+    handleAddMovie() {
+        firebaseDB.ref('movies').push(this.state.movie);
+        this.props.onReturnHome();
+    }
+
+    handleBack() {
+        this.setState({ movie: null });
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Input label="IMDB Movie ID"
-                       onChangeText={(e) => this.handleImdbIDChange(e)}></Input>
-                <Button title="Search IMBD"
-                        onPress={() => this.handleSearch()}></Button>
+                { this.state.movie == null &&
+                    <React.Fragment>
+                        <Input label="IMDB Movie ID"
+                               onChangeText={(e) => this.handleImdbIDChange(e)}></Input>
+                        <Button title="Search IMBD"
+                                onPress={() => this.handleSearch()}></Button>
+                    </React.Fragment>
+                }
+                { this.state.movie != null && 
+                    <React.Fragment>
+                        <MovieCard movie={this.state.movie}></MovieCard>
+                        <Button title="Add Movie"
+                                onPress={() => this.handleAddMovie()}
+                                containerStyle={styles.button}></Button>
+                        <Button title="Back to Search"
+                                onPress={() => this.handleBack()}
+                                containerStyle={styles.button}></Button>
+                    </React.Fragment>
+                }
             </View>
         )
     }
@@ -55,4 +94,8 @@ const styles = StyleSheet.create({
     container: {
       padding: 20
     },
+    button: {
+        marginTop: 15,
+        marginBottom: 15
+    }
   });
