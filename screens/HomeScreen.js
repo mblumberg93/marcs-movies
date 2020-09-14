@@ -6,11 +6,18 @@ export const HomeScreen = ({ route, navigation }) => {
     const goToAddMovieScreen = () => {
         navigation.navigate("Add Movie", { });
     }
+    const goToMoviesScreen = () => {
+        navigation.navigate("Movies", { });
+    }
 
     return (
         <SafeAreaView style={styles.container}>
+            <Button title="Movies"
+                    onPress={goToMoviesScreen}
+                    style={styles.button}></Button>
             <Button title="Add Movie"
-                    onPress={goToAddMovieScreen}></Button>
+                    onPress={goToAddMovieScreen}
+                    style={styles.button}></Button>
         </SafeAreaView>
     );
 };
@@ -21,4 +28,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    button: {
+        marginBottom: 20
+    }
   });

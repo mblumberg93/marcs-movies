@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-elements'
 
 class MovieCard extends Component {
@@ -7,7 +7,7 @@ class MovieCard extends Component {
         return (
             <React.Fragment>
                 { this.props.movie != null && 
-                    <View style={styles.movieCard}>
+                    <TouchableOpacity style={styles.movieCard}>
                         <Text h4>{this.props.movie.title} ({this.props.movie.year})</Text>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                             <Image source={{uri: this.props.movie.poster}} 
@@ -36,7 +36,7 @@ class MovieCard extends Component {
                             </View>
                         </View>
                         <Text style={styles.movieAttribute}>{this.props.movie.plot}</Text>
-                    </View>
+                    </TouchableOpacity>
                 }
             </React.Fragment>
         )
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 15,
         borderRadius: 10,
-        marginTop: 20,
         marginBottom: 20
     },
     movieAttribute: {
@@ -60,4 +59,4 @@ const styles = StyleSheet.create({
     movieAttributeName: {
         fontWeight: "bold"
     }
-  });
+});
