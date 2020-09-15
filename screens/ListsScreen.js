@@ -15,14 +15,12 @@ export const ListsScreen = ({ route, navigation }) => {
 
     const refreshLists = () => {
         firebaseDB.ref("lists").once('value', function(snapshot) {
-            const data = [];
-            const datapoints = snapshot.val();
-            const ids = datapoints ? Object.keys(datapoints) : [];
-            ids.forEach(id => {
-                var list = { name: datapoints[id] };
-                list.id = id
+            let data = []
+            snapshot.forEach(datapoint => {
+                var list = datapoint.val();
+                list.id = datapoint.key
                 data.push(list);
-            });
+            })
             data.sort(function(a, b) {
                 const aName = a.name.toLowerCase();
                 const bName= b.name.toLowerCase();
@@ -45,9 +43,13 @@ export const ListsScreen = ({ route, navigation }) => {
     }
 
     const addList = () => {
-        firebaseDB.ref('lists').push(newList);
+        firebaseDB.ref('lists').push({ name: newList });
         setIsAdding(false);
         refreshLists();
+    }
+
+    const goToListScreen = (id) => {
+        navigation.navigate("List", { id: id });
     }
 
     return isAdding ? (
@@ -67,7 +69,8 @@ export const ListsScreen = ({ route, navigation }) => {
                 <Button key={list.id}
                         title={list.name}
                         type="outline" 
-                        style={styles.button} />
+                        style={styles.button} 
+                        onPress={() => goToListScreen(list.id)}/>
             )}
             <Button title="Add List"
                     onPress={showListForm}></Button>

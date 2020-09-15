@@ -7,7 +7,7 @@ export const MoviesScreen = ({ route, navigation }) => {
     const [movies, setMovies] = useState();
 
     useEffect(() => {
-        firebaseDB.ref("movies").orderByChild('year').once('value', function(snapshot) {
+        firebaseDB.ref("movies").once('value', function(snapshot) {
             let data = []
             snapshot.forEach(datapoint => {
                 const movie = datapoint.val();
