@@ -3,11 +3,17 @@ import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-elements'
 
 class MovieCard extends Component {
+    handlePress() {
+        if (this.props.onPress) {
+            this.props.onPress(this.props.movie.id);
+        }
+    }
+
     render() {
         return (
             <React.Fragment>
                 { this.props.movie != null && 
-                    <TouchableOpacity style={styles.movieCard}>
+                    <TouchableOpacity style={styles.movieCard} onPress={() => this.handlePress(this.props.movie.id)}>
                         <Text h4>{this.props.movie.title} ({this.props.movie.year})</Text>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                             <Image source={{uri: this.props.movie.poster}} 

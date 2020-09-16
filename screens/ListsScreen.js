@@ -48,8 +48,8 @@ export const ListsScreen = ({ route, navigation }) => {
         refreshLists();
     }
 
-    const goToListScreen = (id) => {
-        navigation.navigate("List", { id: id });
+    const goToListScreen = (id, name) => {
+        navigation.navigate("List", { id: id, name: name });
     }
 
     return isAdding ? (
@@ -70,7 +70,7 @@ export const ListsScreen = ({ route, navigation }) => {
                         title={list.name}
                         type="outline" 
                         style={styles.button} 
-                        onPress={() => goToListScreen(list.id)}/>
+                        onPress={() => goToListScreen(list.id, list.name)}/>
             )}
             <Button title="Add List"
                     onPress={showListForm}></Button>
