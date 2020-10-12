@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-elements'
+import { Button } from 'react-native-elements';
 
 class MovieCard extends Component {
     handlePress() {
@@ -9,39 +10,60 @@ class MovieCard extends Component {
         }
     }
 
+    handleEdit() {
+        if (this.props.editable && this.props.onEdit) {
+            this.props.onEdit(this.props.movie);
+        }
+    }
+
     render() {
+        const movieAttributeStyle = {
+            marginTop: 5,
+            marginBottom: 5
+        }
+        const movieAttributeNameStyle = {
+            fontWeight: "bold"
+        }
         return (
             <React.Fragment>
                 { this.props.movie != null && 
                     <TouchableOpacity style={styles.movieCard} onPress={() => this.handlePress(this.props.movie.id)}>
-                        <Text h4>{this.props.movie.title} ({this.props.movie.year})</Text>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 10 }}>
+                            <Text h4 style={{ flexGrow: 1 }}>{this.props.movie.title} ({this.props.movie.year})</Text>
+                            { this.props.editable &&
+                                <Button title="Edit" 
+                                        type="outline" 
+                                        titleStyle={{ fontSize: 12 }} 
+                                        onPress={() => this.handleEdit()}/>
+                            }
+                        </View>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                             <Image source={{uri: this.props.movie.poster}} 
                                 style={{ flex: 1, resizeMode: 'contain', margin: 10 }}></Image>
                             <View style={{ flex: 1 }}>
-                                <Text style={styles.movieAttribute}>
-                                    <Text style={styles.movieAttributeName}>Genres: </Text>
+                                <Text style={movieAttributeStyle}>
+                                    <Text style={movieAttributeNameStyle}>Genres: </Text>
                                     {this.props.movie.genre} 
                                 </Text>
-                                <Text style={styles.movieAttribute}>
-                                    <Text style={styles.movieAttributeName}>Runtime: </Text>
+                                <Text style={movieAttributeStyle}>
+                                    <Text style={movieAttributeNameStyle}>Runtime: </Text>
                                     {this.props.movie.runtime} 
                                 </Text>
-                                <Text style={styles.movieAttribute}>
-                                    <Text style={styles.movieAttributeName}>Actors: </Text>
+                                <Text style={movieAttributeStyle}>
+                                    <Text style={movieAttributeNameStyle}>Actors: </Text>
                                     {this.props.movie.actors} 
                                 </Text>
-                                <Text style={styles.movieAttribute}>
-                                    <Text style={styles.movieAttributeName}>Director: </Text>
+                                <Text style={movieAttributeStyle}>
+                                    <Text style={movieAttributeNameStyle}>Director: </Text>
                                     {this.props.movie.director} 
                                 </Text>
-                                <Text style={styles.movieAttribute}>
-                                    <Text style={styles.movieAttributeName}>IMDB Rating: </Text>
+                                <Text style={movieAttributeStyle}>
+                                    <Text style={movieAttributeNameStyle}>IMDB Rating: </Text>
                                     {this.props.movie.imdbRating} 
                                 </Text>              
                             </View>
                         </View>
-                        <Text style={styles.movieAttribute}>{this.props.movie.plot}</Text>
+                        <Text style={movieAttributeStyle}>{this.props.movie.plot}</Text>
                     </TouchableOpacity>
                 }
             </React.Fragment>
@@ -57,12 +79,5 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 10,
         marginBottom: 20
-    },
-    movieAttribute: {
-        marginTop: 5,
-        marginBottom: 5
-    },
-    movieAttributeName: {
-        fontWeight: "bold"
     }
 });

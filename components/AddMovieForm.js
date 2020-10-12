@@ -77,10 +77,10 @@ class AddMovieForm extends Component {
                         <MovieCard movie={this.state.movie}></MovieCard>
                         <Button title="Add Movie"
                                 onPress={() => this.handleAddMovie()}
-                                containerStyle={styles.button}></Button>
+                                containerStyle={{ marginBottom: 15 }}></Button>
                         <Button title="Back to Search"
                                 onPress={() => this.handleBack()}
-                                containerStyle={styles.button}></Button>
+                                containerStyle={{ marginBottom: 15 }}></Button>
                     </React.Fragment>
                 }
             </View>
@@ -93,8 +93,5 @@ export default AddMovieForm;
 const styles = StyleSheet.create({
     container: {
       padding: 20
-    },
-    button: {
-        marginBottom: 15
     }
-  });
+});

@@ -18,7 +18,8 @@ export const ListsScreen = ({ route, navigation }) => {
             let data = []
             snapshot.forEach(datapoint => {
                 var list = datapoint.val();
-                list.id = datapoint.key
+                list.id = datapoint.key;
+                list.movieIds = Object.entries(list.movies).map(([k,v]) => v);
                 data.push(list);
             })
             data.sort(function(a, b) {
@@ -48,8 +49,8 @@ export const ListsScreen = ({ route, navigation }) => {
         refreshLists();
     }
 
-    const goToListScreen = (id, name) => {
-        navigation.navigate("List", { id: id, name: name });
+    const goToListScreen = (id, movieIds) => {
+        navigation.navigate("List", { id: id, movieIds: movieIds});
     }
 
     return isAdding ? (
@@ -70,7 +71,7 @@ export const ListsScreen = ({ route, navigation }) => {
                         title={list.name}
                         type="outline" 
                         style={styles.button} 
-                        onPress={() => goToListScreen(list.id, list.name)}/>
+                        onPress={() => goToListScreen(list.id, list.movieIds)}/>
             )}
             <Button title="Add List"
                     onPress={showListForm}></Button>

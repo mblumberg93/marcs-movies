@@ -5,21 +5,27 @@ import MovieCard from '../components/MovieCard';
 
 export const AddMovieToListScreen = ({ route, navigation }) => {
     const [listId, setListId] = useState();
-    const [movies, setMovies] = useState();
+    const [movieIds, setMovieIds] = useState([]);
+    const [movies, setMovies] = useState([]);
 
     useEffect(() => {
         setListId(route.params.listId);
-        refreshMovies();
+        setMovieIds(route.params.movieIds);
+        refreshMovies(route.params.movieIds);
+        const navSubscription = navigation.addListener('focus', () => {
+            refreshMovies(route.params.movieIds);
+        });
     }, []);
 
-    const refreshMovies = () => {
+    const refreshMovies = (ids) => {
         firebaseDB.ref("movies").once('value', function(snapshot) {
             let data = []
             snapshot.forEach(datapoint => {
                 const movie = datapoint.val();
-                movie.id = datapoint.key
+                movie.id = datapoint.key;
                 data.push(movie);
-            })
+            });
+            data = data.filter(movie => !ids.includes(movie.id));
             data.sort(function(a, b) {
                 const aTitle = a.title.toLowerCase();
                 const bTitle = b.title.toLowerCase();
@@ -30,7 +36,11 @@ export const AddMovieToListScreen = ({ route, navigation }) => {
     }
 
     const addMovieToList = (movieId) => {
-        firebaseDB.ref('lists/' + listId + '/movies').push(movieId);
+        firebaseDB.ref('lists/' + listId + '/movies').push(movieId).then(() => {
+            const newMovieIds = movieIds;
+            newMovieIds.push(movieId);
+            navigation.navigate("List", { id: listId, movieIds: newMovieIds });
+        });
     }
 
     return movies ? (
