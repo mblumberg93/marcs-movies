@@ -3,9 +3,6 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import { Button, Text } from 'react-native-elements';
 
 export const HomeScreen = ({ route, navigation }) => {
-    const goToAddMovieScreen = () => {
-        navigation.navigate("Add Movie", { });
-    }
 
     const goToMoviesScreen = () => {
         navigation.navigate("Movies", { });
@@ -17,16 +14,13 @@ export const HomeScreen = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text h3 style={{marginBottom: 20}}>Lists</Text>
-            <Button title="View Lists"
+            <Text h3 style={{marginBottom: 20}}>Movie Lists</Text>
+            <Button title="See Lists"
                     onPress={goToListsScreen}
                     style={styles.button}></Button>
             <Text h3 style={{marginBottom: 20}}>Movie Management</Text>
-            <Button title="View Movies"
+            <Button title="Manage"
                     onPress={goToMoviesScreen}
-                    style={styles.button}></Button>
-            <Button title="Add Movie"
-                    onPress={goToAddMovieScreen}
                     style={styles.button}></Button>
         </SafeAreaView>
     );

@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { firebaseDB } from '../services/firebase';
 import MovieCard from '../components/MovieCard';
+import { Button } from 'react-native-elements';
 
 export const MoviesScreen = ({ route, navigation }) => {
     const [movies, setMovies] = useState();
 
     useEffect(() => {
+        refreshMovies();
+        const navSubscription = navigation.addListener('focus', () => {
+            refreshMovies();
+        });
+     }, []);
+
+     const refreshMovies = () => {
         firebaseDB.ref("movies").once('value', function(snapshot) {
             let data = []
             snapshot.forEach(datapoint => {
@@ -21,10 +29,17 @@ export const MoviesScreen = ({ route, navigation }) => {
             });
             setMovies(data);
         });
-     }, []);
+     }
+
+     const goToAddMovieScreen = () => {
+        navigation.navigate("Add Movie", { });
+    }
 
     return movies ? (
         <View style={styles.container}>
+            <Button title="Add Movie"
+                    onPress={goToAddMovieScreen}
+                    style={styles.button}></Button>
             { movies.map(movie => 
                 <MovieCard key={movie.id} movie={movie}></MovieCard>
             )}
@@ -39,5 +54,8 @@ export const MoviesScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         padding: 20
+    },
+    button: {
+        marginBottom: 20
     }
 });

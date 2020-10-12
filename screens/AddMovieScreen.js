@@ -4,7 +4,7 @@ import AddMovieForm from "../components/AddMovieForm";
 
 export const AddMovieScreen = ({ route, navigation }) => {
     const goHomeScreen = () => {
-        navigation.navigate("Home", { });
+        navigation.navigate("Movies", { });
     }
 
     return (
