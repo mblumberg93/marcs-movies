@@ -45,17 +45,24 @@ export const ListScreen = ({ route, navigation }) => {
         navigation.navigate("Remove Movie From List", { listId: listId, movieIds: movieIds, movie: movie });
     }
 
+    const goToRandomMovieScreen = () => {
+        navigation.navigate("Random Movie", { movieIds: movieIds });
+    }
+
     return (
         <View style={styles.container}>
+            <Button title="Random Movie"
+                    onPress={goToRandomMovieScreen}
+                    style={styles.button}></Button>
+            <Button title="Add Movie"
+                    onPress={goToAddMoviesScreen}
+                    style={styles.button}></Button>
             { movies.map(movie => 
                 <MovieCard key={movie.id} 
                            movie={movie}
                            editable={true}
                            onEdit={goToEditMovieScreen}></MovieCard>
             )}
-            <Button title="Add Movie"
-                    onPress={goToAddMoviesScreen}
-                    style={styles.button}></Button>
         </View>
     );
 }

@@ -8,6 +8,7 @@ import { ListsScreen } from './screens/ListsScreen';
 import { ListScreen } from './screens/ListScreen';
 import { AddMovieToListScreen } from './screens/AddMovieToListScreen';
 import { RemoveMovieFromListScreen } from './screens/RemoveMovieFromListScreen';
+import { RandomMovieScreen } from './screens/RandomMovieScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
                       options={({ route }) => ({ title: route.params.name })} />
         <Stack.Screen name="Add Movie To List" component={AddMovieToListScreen} />
         <Stack.Screen name="Remove Movie From List" component={RemoveMovieFromListScreen} />
+        <Stack.Screen name="Random Movie" component={RandomMovieScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
