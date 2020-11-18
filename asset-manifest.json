@@ -1,0 +1,38 @@
+{
+  "files": {
+    "app.js": "/marcs-movies/static/js/app.53b1bbc7.chunk.js",
+    "app.js.map": "/marcs-movies/static/js/app.53b1bbc7.chunk.js.map",
+    "runtime~app.js": "/marcs-movies/static/js/runtime~app.1d297d3a.js",
+    "runtime~app.js.map": "/marcs-movies/static/js/runtime~app.1d297d3a.js.map",
+    "static/js/2.28c3837a.chunk.js": "/marcs-movies/static/js/2.28c3837a.chunk.js",
+    "static/js/2.28c3837a.chunk.js.map": "/marcs-movies/static/js/2.28c3837a.chunk.js.map",
+    "fonts/AntDesign.ttf": "/marcs-movies/./fonts/AntDesign.ttf",
+    "fonts/Entypo.ttf": "/marcs-movies/./fonts/Entypo.ttf",
+    "fonts/Feather.ttf": "/marcs-movies/./fonts/Feather.ttf",
+    "fonts/FontAwesome.ttf": "/marcs-movies/./fonts/FontAwesome.ttf",
+    "fonts/FontAwesome5_Brands.ttf": "/marcs-movies/./fonts/FontAwesome5_Brands.ttf",
+    "fonts/FontAwesome5_Solid.ttf": "/marcs-movies/./fonts/FontAwesome5_Solid.ttf",
+    "fonts/Fontisto.ttf": "/marcs-movies/./fonts/Fontisto.ttf",
+    "fonts/Foundation.ttf": "/marcs-movies/./fonts/Foundation.ttf",
+    "fonts/Ionicons.ttf": "/marcs-movies/./fonts/Ionicons.ttf",
+    "fonts/MaterialCommunityIcons.ttf": "/marcs-movies/./fonts/MaterialCommunityIcons.ttf",
+    "fonts/MaterialIcons.ttf": "/marcs-movies/./fonts/MaterialIcons.ttf",
+    "fonts/SimpleLineIcons.ttf": "/marcs-movies/./fonts/SimpleLineIcons.ttf",
+    "favicon-16.png": "/marcs-movies/favicon-16.png",
+    "favicon-32.png": "/marcs-movies/favicon-32.png",
+    "favicon.ico": "/marcs-movies/favicon.ico",
+    "index.html": "/marcs-movies/index.html",
+    "manifest.json": "/marcs-movies/manifest.json",
+    "serve.json": "/marcs-movies/serve.json",
+    "static/js/2.28c3837a.chunk.js.LICENSE.txt": "/marcs-movies/static/js/2.28c3837a.chunk.js.LICENSE.txt",
+    "static/media/bell.png": "/marcs-movies/static/media/bell.cf04af27.png",
+    "static/media/heart.png": "/marcs-movies/static/media/heart.23b5c2c0.png",
+    "static/media/rocket.png": "/marcs-movies/static/media/rocket.d2f3bf41.png",
+    "static/media/star.png": "/marcs-movies/static/media/star.69c71386.png"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.1d297d3a.js",
+    "static/js/2.28c3837a.chunk.js",
+    "static/js/app.53b1bbc7.chunk.js"
+  ]
+}
