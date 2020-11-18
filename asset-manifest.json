@@ -1,7 +1,7 @@
 {
   "files": {
-    "app.js": "/marcs-movies/static/js/app.53b1bbc7.chunk.js",
-    "app.js.map": "/marcs-movies/static/js/app.53b1bbc7.chunk.js.map",
+    "app.js": "/marcs-movies/static/js/app.b06f428b.chunk.js",
+    "app.js.map": "/marcs-movies/static/js/app.b06f428b.chunk.js.map",
     "runtime~app.js": "/marcs-movies/static/js/runtime~app.1d297d3a.js",
     "runtime~app.js.map": "/marcs-movies/static/js/runtime~app.1d297d3a.js.map",
     "static/js/2.28c3837a.chunk.js": "/marcs-movies/static/js/2.28c3837a.chunk.js",
@@ -33,6 +33,6 @@
   "entrypoints": [
     "static/js/runtime~app.1d297d3a.js",
     "static/js/2.28c3837a.chunk.js",
-    "static/js/app.53b1bbc7.chunk.js"
+    "static/js/app.b06f428b.chunk.js"
   ]
 }

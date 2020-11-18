@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/marcs-movies/./fonts/Feather.ttf"
   },
   {
-    "revision": "68339ac701fda63237ef",
-    "url": "/marcs-movies/static/js/app.53b1bbc7.chunk.js"
+    "revision": "e9977eecd967cefcd5ef",
+    "url": "/marcs-movies/static/js/app.b06f428b.chunk.js"
   },
   {
     "revision": "913262f2cb0af0c6f87a",
@@ -76,7 +76,7 @@ self.__precacheManifest = [
     "url": "/marcs-movies/expo-service-worker.js"
   },
   {
-    "revision": "32ce00c5661c91b7efbdfebe7f1082e2",
+    "revision": "b12d8ae72ea32349d3dd736c0e9f7004",
     "url": "/marcs-movies/index.html"
   },
   {
