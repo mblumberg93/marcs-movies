@@ -1,6 +1,7 @@
 import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { Button, Text } from 'react-native-elements';
+import { EDITING_ENABLED } from '../secrets';
 
 export const HomeScreen = ({ route, navigation }) => {
 
@@ -14,14 +15,20 @@ export const HomeScreen = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Text h4 style={{marginBottom: 30}}>Need an idea for a movie to watch? Check out the lists!</Text>
             <Text h3 style={{marginBottom: 20}}>Movie Lists</Text>
             <Button title="See Lists"
                     onPress={goToListsScreen}
                     style={styles.button}></Button>
-            <Text h3 style={{marginBottom: 20}}>Movie Management</Text>
-            <Button title="Manage"
-                    onPress={goToMoviesScreen}
-                    style={styles.button}></Button>
+            { EDITING_ENABLED &&
+                <React.Fragment>
+                        <Text h3 style={{marginBottom: 20}}>Movie Management</Text>
+                        <Button title="Manage"
+                                onPress={goToMoviesScreen}
+                                style={styles.button}></Button>
+                </React.Fragment>
+            }
+
         </SafeAreaView>
     );
 };

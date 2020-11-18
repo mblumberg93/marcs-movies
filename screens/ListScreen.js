@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { firebaseDB } from '../services/firebase';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import MovieCard from '../components/MovieCard';
+import { EDITING_ENABLED } from '../secrets';
 
 export const ListScreen = ({ route, navigation }) => {
     const [listId, setListId] = useState();
@@ -28,14 +29,18 @@ export const ListScreen = ({ route, navigation }) => {
                 data.push(movie);
             })
             data = data.filter(movie => ids.includes(movie.id));
-            data.sort(function(a, b) {
-                const aTitle = a.title.toLowerCase();
-                const bTitle = b.title.toLowerCase();
-                return (aTitle < bTitle) ? -1 : (aTitle > bTitle) ? 1 : 0;
-            });
+            data = shuffle(data);
             setMovies(data);
         });
     };
+
+    function shuffle(list) {
+        for (let i = list.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [list[i], list[j]] = [list[j], list[i]];
+        }
+        return list;
+    }
 
     const goToAddMoviesScreen = () => {
         navigation.navigate("Add Movie To List", { listId: listId, movieIds: movieIds });
@@ -51,12 +56,15 @@ export const ListScreen = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Text h3 style={{marginBottom: 20}}>Total Movies: {movies.length}</Text>
             <Button title="Random Movie"
                     onPress={goToRandomMovieScreen}
                     style={styles.button}></Button>
-            <Button title="Add Movie"
-                    onPress={goToAddMoviesScreen}
-                    style={styles.button}></Button>
+            { EDITING_ENABLED && 
+                <Button title="Add Movie"
+                        onPress={goToAddMoviesScreen}
+                        style={styles.button}></Button>
+            }
             { movies.map(movie => 
                 <MovieCard key={movie.id} 
                            movie={movie}

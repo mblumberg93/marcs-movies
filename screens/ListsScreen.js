@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { firebaseDB } from '../services/firebase';
 import { Button, Input } from 'react-native-elements';
+import { EDITING_ENABLED } from '../secrets';
 
 export const ListsScreen = ({ route, navigation }) => {
     const [lists, setLists] = useState();
@@ -19,7 +20,12 @@ export const ListsScreen = ({ route, navigation }) => {
             snapshot.forEach(datapoint => {
                 var list = datapoint.val();
                 list.id = datapoint.key;
-                list.movieIds = Object.entries(list.movies).map(([k,v]) => v);
+                if (list.movies) {
+                    list.movieIds = Object.entries(list.movies).map(([k,v]) => v);
+                } else {
+                    list.movies = [];
+                    list.movieIds = [];
+                }
                 data.push(list);
             })
             data.sort(function(a, b) {
@@ -73,8 +79,10 @@ export const ListsScreen = ({ route, navigation }) => {
                         style={styles.button} 
                         onPress={() => goToListScreen(list.id, list.name, list.movieIds)}/>
             )}
-            <Button title="Add List"
-                    onPress={showListForm}></Button>
+            { EDITING_ENABLED && 
+                <Button title="Add List"
+                        onPress={showListForm}></Button>
+            }
         </View>
         ) : (
         <View style={styles.container}>
