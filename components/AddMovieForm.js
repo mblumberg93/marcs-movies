@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button } from 'react-native-elements'
 import { View, StyleSheet } from "react-native";
-import { RAPID_API_KEY } from '../secrets';
 import { firebaseDB } from '../services/firebase';
 import MovieCard from '../components/MovieCard';
 
@@ -27,7 +26,7 @@ class AddMovieForm extends Component {
             method: "GET",
             headers: {
                 "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
-                "x-rapidapi-key": RAPID_API_KEY,
+                "x-rapidapi-key": this.props.rapid_api_key,
                 "useQueryString": true
             },
           }).then(response => response.json())

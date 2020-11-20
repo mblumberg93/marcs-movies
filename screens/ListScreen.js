@@ -3,12 +3,13 @@ import { View, StyleSheet } from "react-native";
 import { firebaseDB } from '../services/firebase';
 import { Button, Text } from 'react-native-elements';
 import MovieCard from '../components/MovieCard';
-import { EDITING_ENABLED } from '../secrets';
+import { useSelector } from 'react-redux';
 
 export const ListScreen = ({ route, navigation }) => {
     const [listId, setListId] = useState();
     const [movieIds, setMovieIds] = useState([]);
     const [movies, setMovies] = useState([]);
+    const appState = useSelector(state => state);
 
     useEffect(() => {
         setListId(route.params.id);
@@ -60,7 +61,7 @@ export const ListScreen = ({ route, navigation }) => {
             <Button title="Random Movie"
                     onPress={goToRandomMovieScreen}
                     style={styles.button}></Button>
-            { EDITING_ENABLED && 
+            { appState.can_edit && 
                 <Button title="Add Movie"
                         onPress={goToAddMoviesScreen}
                         style={styles.button}></Button>
@@ -69,6 +70,8 @@ export const ListScreen = ({ route, navigation }) => {
                 <MovieCard key={movie.id} 
                            movie={movie}
                            editable={true}
+                           appState={appState}
+                           editing_enabled={appState.can_edit}
                            onEdit={goToEditMovieScreen}></MovieCard>
             )}
         </View>

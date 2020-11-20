@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { firebaseDB } from '../services/firebase';
 import { Button, Input } from 'react-native-elements';
-import { EDITING_ENABLED } from '../secrets';
+import { useSelector } from 'react-redux';
 
 export const ListsScreen = ({ route, navigation }) => {
     const [lists, setLists] = useState();
     const [isAdding, setIsAdding] = useState(false);
     const [newList, setNewList] = useState();
+    const appState = useSelector(state => state);
 
     useEffect(() => {
         setIsAdding(false);
@@ -79,7 +80,7 @@ export const ListsScreen = ({ route, navigation }) => {
                         style={styles.button} 
                         onPress={() => goToListScreen(list.id, list.name, list.movieIds)}/>
             )}
-            { EDITING_ENABLED && 
+            { appState.can_edit && 
                 <Button title="Add List"
                         onPress={showListForm}></Button>
             }

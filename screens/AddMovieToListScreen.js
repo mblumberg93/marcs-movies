@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { firebaseDB } from '../services/firebase';
 import MovieCard from '../components/MovieCard';
+import { useSelector } from 'react-redux';
 
 export const AddMovieToListScreen = ({ route, navigation }) => {
     const [listId, setListId] = useState();
     const [movieIds, setMovieIds] = useState([]);
     const [movies, setMovies] = useState([]);
+    const appState = useSelector(state => state);
 
     useEffect(() => {
         setListId(route.params.listId);
@@ -48,6 +50,8 @@ export const AddMovieToListScreen = ({ route, navigation }) => {
             { movies.map(movie => 
                 <MovieCard key={movie.id} 
                            movie={movie}
+                           appState={appState}
+                           editing_enabled={appState.can_edit}
                            onPress={addMovieToList}></MovieCard>
             )}
         </View>

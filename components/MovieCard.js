@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-elements';
 import { Button } from 'react-native-elements';
-import { EDITING_ENABLED } from '../secrets';
 
 class MovieCard extends Component {
     handlePress() {
-        if (this.props.onPress && EDITING_ENABLED) {
+        if (this.props.onPress && this.props.editing_enabled) {
             this.props.onPress(this.props.movie.id);
         }
     }
 
     handleEdit() {
-        if (this.props.editable && this.props.onEdit && EDITING_ENABLED) {
+        if (this.props.editable && this.props.onEdit && this.props.editing_enabled) {
             this.props.onEdit(this.props.movie);
         }
     }
@@ -31,7 +30,7 @@ class MovieCard extends Component {
                     <TouchableOpacity style={styles.movieCard} onPress={() => this.handlePress(this.props.movie.id)}>
                         <View style={{ flex: 1, flexDirection: 'row', marginBottom: 10 }}>
                             <Text h4 style={{ flexGrow: 1 }}>{this.props.movie.title} ({this.props.movie.year})</Text>
-                            { this.props.editable && EDITING_ENABLED &&
+                            { this.props.editable && this.props.editing_enabled &&
                                 <Button title="Edit" 
                                         type="outline" 
                                         titleStyle={{ fontSize: 12 }} 

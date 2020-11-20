@@ -1,9 +1,10 @@
 import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { Button, Text } from 'react-native-elements';
-import { EDITING_ENABLED } from '../secrets';
+import { useSelector } from 'react-redux';
 
 export const HomeScreen = ({ route, navigation }) => {
+    const appState = useSelector(state => state);
 
     const goToMoviesScreen = () => {
         navigation.navigate("Movies", { });
@@ -13,6 +14,10 @@ export const HomeScreen = ({ route, navigation }) => {
         navigation.navigate("Lists", { });
     }
 
+    const goToLogin = () => {
+        navigation.navigate("Login", { });
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Text h4 style={{marginBottom: 30}}>Need an idea for a movie to watch? Check out the lists!</Text>
@@ -20,7 +25,7 @@ export const HomeScreen = ({ route, navigation }) => {
             <Button title="See Lists"
                     onPress={goToListsScreen}
                     style={styles.button}></Button>
-            { EDITING_ENABLED &&
+            { appState.can_edit &&
                 <React.Fragment>
                         <Text h3 style={{marginBottom: 20}}>Movie Management</Text>
                         <Button title="Manage"
@@ -28,7 +33,10 @@ export const HomeScreen = ({ route, navigation }) => {
                                 style={styles.button}></Button>
                 </React.Fragment>
             }
-
+                <Button title="Admin Login"
+                        type="outline"
+                        onPress={goToLogin}
+                        style={styles.button}></Button>
         </SafeAreaView>
     );
 };
